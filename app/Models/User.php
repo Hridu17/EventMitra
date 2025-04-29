@@ -18,9 +18,12 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'firstName',
+        'lastName',
+        'phoneNumber',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -32,7 +35,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+ 
     /**
      * Get the attributes that should be cast.
      *
@@ -44,5 +47,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }
